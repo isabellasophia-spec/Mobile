@@ -1,35 +1,65 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Tabs } from "expo-router";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Background } from "@react-navigation/elements";
+import { setStatusBarBackgroundColor } from "expo-status-bar";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
+export default function TabLayout(){
+  return(
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
+        tabBarActiveTintColor: '#ff3d7e9c',
+        headerStyle: {
+          backgroundColor: 'pink',
+        },
+ 
+        headerShadowVisible: false,
+        headerTintColor: '#fff',
+        tabBarStyle: {
+          backgroundColor: 'pink',
+        },
       }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: 'Home',
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons name={focused ? 'flower' : 'flower-outline'} color={color} size={24}/>
+
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="about"
+          options={{
+            title: 'Sobre',
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons name={focused ? 'flower-pollen' : 'flower-pollen-outline'} color={color} size={24}/>
+
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="toDoList"
+          options={{
+            title: 'Lista de Tarefas',
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons name={focused ? 'clipboard-list' : 'clipboard-outline'} color={color} size={24}/>
+
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="galeriaDeFotos"
+          options={{
+            title: 'Galeria',
+            tabBarIcon: ({ color, focused }) => (
+              <MaterialCommunityIcons name={focused ? 'view-gallery' : 'view-gallery-outline'} color={color} size={24}/>
+
+            ),
+          }}
+        />
     </Tabs>
   );
-}
+} 
